@@ -137,6 +137,25 @@ function dibujaRex(){
 }
 
 
+function niveles(){
+    switch (nivel.puntuacion) {
+        case 5: nivel.velocidad = 11;
+        break;
+
+        case 10: nivel.velocidad = 13;
+        break;
+        
+        case 15: nivel.velocidad = 15;
+        break;
+
+        case 20: nivel.velocidad = 17;
+        break;
+    
+        default: 
+        break;
+    }
+}
+
 ///////////////////////////////////////////////////////////////
 
 
@@ -217,6 +236,8 @@ function principal(){
 
     colision();
     puntuacion();
+
+    niveles();
     
     console.log("Principal");
 }
