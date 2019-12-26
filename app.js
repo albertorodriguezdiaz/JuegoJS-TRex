@@ -136,24 +136,39 @@ function dibujaRex(){
     ctx.drawImage(imgRex,0,0,120,100,100,tRex.y,120,100);
 }
 
+var velocidad = 1;
 
 function niveles(){
+
     switch (nivel.puntuacion) {
         case 5: nivel.velocidad = 11;
+        velocidad = 2;
         break;
 
         case 10: nivel.velocidad = 13;
+        velocidad = 3;
         break;
         
         case 15: nivel.velocidad = 15;
+        velocidad = 4;
         break;
 
         case 20: nivel.velocidad = 17;
+        velocidad = 5;
+        break;
+
+        case 25: nivel.velocidad = 19;
+        velocidad = 6;
         break;
     
         default: 
         break;
     }
+
+    ctx.font = "30px impact";
+    ctx.fillStyle = "#555555";
+    ctx.fillText("Velocidad: "+velocidad,50,50);
+
 }
 
 ///////////////////////////////////////////////////////////////
