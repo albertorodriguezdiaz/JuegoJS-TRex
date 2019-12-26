@@ -2,20 +2,25 @@ console.log('Inicio de Juego');
 
 document.addEventListener('keydown', function(evento){
     if(evento.keyCode == 32){
-        console.log("Saltar");
-        if (nivel.muerto == false) {
-            saltar();
-        }else{
-            nivel.velocidad = 9;
-            nivel.muerto = false;
-            nube.velocidad = 2;
-            nube.x = ancho - 300;
-            cactus.x = ancho + 100;
-            nivel.puntuacion = 0;
-        }
-        
+
+            console.log("Saltar");
+            if (nivel.muerto == false) {
+                saltar();
+            }else{
+                detenerJuego(true);
+            }
     }
 });
+
+function detenerJuego(muerto){
+    nivel.velocidad = 0;
+    nivel.muerto = muerto;
+    nivel.niveles = 1;
+    nube.velocidad = 2;
+    nube.x = ancho - 300;
+    cactus.x = ancho + 100;
+    nivel.puntuacion = 0;
+}
 
 
 var imgRex, imgNube, imgCactus, imgSuelo;
@@ -136,29 +141,33 @@ function dibujaRex(){
     ctx.drawImage(imgRex,0,0,120,100,100,tRex.y,120,100);
 }
 
-var velocidad = 1;
 
 function niveles(){
 
     switch (nivel.puntuacion) {
         case 5: nivel.velocidad = 11;
-        velocidad = 2;
+        nivel.niveles = 2;
         break;
 
         case 10: nivel.velocidad = 13;
-        velocidad = 3;
+        nivel.niveles = 3;
         break;
         
         case 15: nivel.velocidad = 15;
-        velocidad = 4;
+        nivel.niveles = 4;
         break;
 
         case 20: nivel.velocidad = 17;
-        velocidad = 5;
+        nivel.niveles = 5;
         break;
 
         case 25: nivel.velocidad = 19;
-        velocidad = 6;
+        nivel.niveles = 6;
+        break;
+
+        case 30: 
+        nivel.niveles = 7;
+
         break;
     
         default: 
@@ -167,7 +176,7 @@ function niveles(){
 
     ctx.font = "30px impact";
     ctx.fillStyle = "#555555";
-    ctx.fillText("Velocidad: "+velocidad,50,50);
+    ctx.fillText("Nivel: "+nivel.niveles,50,50);
 
 }
 
@@ -179,6 +188,7 @@ function niveles(){
 var nivel = {
     velocidad: 9,
     puntuacion: 0,
+    niveles: 1,
     muerto: false
 }
 
@@ -216,11 +226,19 @@ function gravedad(){
 function puntuacion(){
     ctx.font = "30px impact";
     ctx.fillStyle = "#555555";
-    ctx.fillText(nivel.puntuacion,600,50);
+    ctx.fillText("Puntos: "+nivel.puntuacion,500,50);
 
-    if(nivel.muerto == true){
+    if(nivel.muerto == true ){
+        detenerJuego(true);
         ctx.font = "60px impact";
         ctx.fillText('GAME OVER',240,200);
+    }
+
+    if(nivel.niveles == 2){
+        detenerJuego(false);
+        ctx.font = "60px impact";
+        ctx.fillText('GANASTES',240,200);
+        nivel.niveles = 2;
     }
 }
 
