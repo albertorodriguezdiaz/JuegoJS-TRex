@@ -234,11 +234,11 @@ function puntuacion(){
         ctx.fillText('GAME OVER',240,200);
     }
 
-    if(nivel.niveles == 2){
+    if(nivel.niveles == 7){
         detenerJuego(false);
         ctx.font = "60px impact";
         ctx.fillText('GANASTES',240,200);
-        nivel.niveles = 2;
+        nivel.niveles = 7;
     }
 }
 
